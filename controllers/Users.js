@@ -19,6 +19,7 @@ module.exports.create = function(req, res) {
             newUser.email = req.body.email;
             newUser.desc = req.body.desc;
 
+            user.collection('users').insert(newUser);
             newUser.save();
 
             res.writeHead(200, {"Content-Type": "application/json"});
