@@ -3,15 +3,19 @@ var passport = require('passport');
 
 module.exports = {};
 
-module.exports.create = function(req, res) {
+module.exports.create = function(req, res)
+{
     if (!req.body.name || !req.body.username || !req.body.password || !req.body.email)
         return res.status(400).end('Invalid input');
 
-    User.findOne({ username:  req.body.username }, function(err, user) {
-        if (user) {
+    User.findOne({ username:  req.body.username }, function(err, user)
+    {
+        if (user)
+        {
             return res.status(400).end('User already exists');
-        } else {
-
+        }
+        else
+        {
             var newUser = new User();
             newUser.name = req.body.name;
             newUser.username = req.body.username;
@@ -31,59 +35,87 @@ module.exports.create = function(req, res) {
 };
 
 module.exports.login = function(req, res, next) {
-    passport.authenticate('local', function(err, user, info) {
+    passport.Authenticator('local', function (err, user, info) {
         if (err)
             return next(err);
-        if(!user)
+        if (!user)
             return res.status(400).json({SERVER_RESPONSE: 0, SERVER_MESSAGE: "Wrong Credentials"});
-        req.logIn(user, function(err) {
+        req.logIn(user, function (err) {
             if (err)
                 return next(err);
             if (!err)
-                return res.json({ SERVER_RESPONSE: 1, SERVER_MESSAGE: "Logged in!" });
-
-        });
-    })(req, res, next);
+                return res.json({SERVER_RESPONSE: 1, SERVER_MESSAGE: "Logged in!"});
+        })(req, res, next);
+    });
 };
+        // passport.authenticate('local', function(err, user, info)
+        // {
+        //     if (err)
+        //         return next(err);
+        //     if(!user)
+        //         return res.status(400).json({SERVER_RESPONSE: 0, SERVER_MESSAGE: "Wrong Credentials"});
+        //     req.logIn(user, function(err) {
+        //         if (err)
+        //             return next(err);
+        //         if (!err)
+        //             return res.json({ SERVER_RESPONSE: 1, SERVER_MESSAGE: "Logged in!" });
+        //
+        //     });
+        // })(req, res, next);
 
-module.exports.read = function(req, res) {
-    User.findById(req.params.id, function(err, user) {
-        if (user) {
+
+module.exports.read = function(req, res)
+{
+    User.findById(req.params.id, function(err, user)
+    {
+        if (user)
+        {
             res.writeHead(200, {"Content-Type": "application/json"});
             user = user.toObject();
             delete user.password;
             delete user.__v;
             res.end(JSON.stringify(user));
-        } else {
+        }
+        else
+        {
             return res.status(400).end('User not found');
         }
     });
 };
 
-module.exports.readByUsername = function(req, res) {
-    User.findOne({ username: req.params.username }, function(err, user) {
-        if (user) {
+module.exports.readByUsername = function(req, res)
+{
+    User.findOne({ username: req.params.username }, function(err, user)
+    {
+        if (user)
+        {
             res.writeHead(200, {"Content-Type": "application/json"});
             user = user.toObject();
             delete user.password;
             delete user.__v;
             res.end(JSON.stringify(user));
-        } else {
+        }
+        else
+        {
             return res.status(400).end('User not found');
         }
     });
 };
 
-module.exports.me = function(req, res) {
+module.exports.me = function(req, res)
+{
 
     User.findOne({ username: req.user.username }, function(err, user) {
-        if (user) {
+        if (user)
+        {
             res.writeHead(200, {"Content-Type": "application/json"});
             user = user.toObject();
             delete user.password;
             delete user.__v;
             res.end(JSON.stringify(user));
-        } else {
+        }
+        else
+        {
             return res.status(400).end('User not found');
         }
     });
@@ -91,12 +123,18 @@ module.exports.me = function(req, res) {
 };
 
 
-module.exports.update = function(req, res) {
-    User.findById(req.user.id, function(err, user) {
-        if (user) {
-            if (user.username != req.user.username) {
+module.exports.update = function(req, res)
+{
+    User.findById(req.user.id, function(err, user)
+    {
+        if (user)
+        {
+            if (user.username != req.user.username)
+            {
                 return res.status(401).end('Modifying other user');
-            } else {
+            }
+            else
+            {
                 user.name = req.body.name ? req.body.name : user.name;
                 user.desc = req.body.dec ? req.body.desc : user.desc;
                 user.username = req.body.username ? req.body.username : user.username;
@@ -109,14 +147,18 @@ module.exports.update = function(req, res) {
                 delete user.password;
                 res.end(JSON.stringify(user));
             }
-        } else {
+        }
+        else
+        {
             return res.status(400).end('User not found');
         }
     });
 };
 
-module.exports.delete = function(req, res) {
-    User.remove({_id: req.user.id}, function(err) {
+module.exports.delete = function(req, res)
+{
+    User.remove({_id: req.user.id}, function(err)
+    {
         res.end('Deleted')
     });
 };
