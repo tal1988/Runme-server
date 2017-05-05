@@ -12,8 +12,9 @@ module.exports = function(app, passport) {
     app.post('/login', users.login);
 
     //test
-    app.get("/users",function (req,res) {
-        res.send({name:"tal"});
+    app.get("/name",function (req,res) {
+        res.writeHead(200,{"Content-Type":"application/json"});
+        res.end("My Name Is Tal");
     });
 
     // Register [x]
