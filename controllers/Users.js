@@ -34,13 +34,16 @@ module.exports.create = function(req, res)
     });
 };
 
-module.exports.login = function(req, res, next) {
-    passport.Authenticator('local', function (err, user, info) {
+module.exports.login = function(req, res, next)
+{
+    passport.Authenticator('local', function (err, user, info)
+    {
         if (err)
             return next(err);
         if (!user)
             return res.status(400).json({SERVER_RESPONSE: 0, SERVER_MESSAGE: "Wrong Credentials"});
-        req.logIn(user, function (err) {
+        req.logIn(user, function (err)
+        {
             if (err)
                 return next(err);
             if (!err)
