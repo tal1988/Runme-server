@@ -11,13 +11,9 @@ module.exports = function(app, passport) {
     // Login [x]
     app.post('/login', users.login);
 
-    //test
-    app.get("/name",function (req,res) {
-        res.send({name:"Tal Biton"});
-    });
 
     // Register [x]
-    app.post('/signup', users.create);
+    app.post('/register', users.create);
 
     // Search For User by ID [x]
     app.get('/user/search/id/:id', users.read);
