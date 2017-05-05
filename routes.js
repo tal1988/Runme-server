@@ -13,8 +13,7 @@ module.exports = function(app, passport) {
 
     //test
     app.get("/name",function (req,res) {
-        res.writeHead(200,{"Content-Type":"application/json"});
-        res.end("My Name Is Tal");
+        res.send({name:"Tal Biton"});
     });
 
     // Register [x]
