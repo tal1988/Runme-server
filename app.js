@@ -38,8 +38,9 @@ app.use(require('express-session')({
     saveUninitialized: false
 }));
 
-app.use('/', index);
-app.use('/users', users);
+// app.use('/', index);
+// app.use('/users', users);
+require('./routes')(app, passport);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next)
