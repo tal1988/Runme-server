@@ -1,4 +1,4 @@
-var User = require('../models/User');
+var User = require('./models/user');
 var passport = require('passport');
 
 module.exports = {};
@@ -36,36 +36,21 @@ module.exports.create = function(req, res)
 
 module.exports.login = function(req, res, next)
 {
-    passport.Authenticator('local', function (err, user, info)
+    passport.authenticate('local', function(err, user, info)
     {
         if (err)
             return next(err);
-        if (!user)
+        if(!user)
             return res.status(400).json({SERVER_RESPONSE: 0, SERVER_MESSAGE: "Wrong Credentials"});
-        req.logIn(user, function (err)
-        {
+        req.logIn(user, function(err) {
             if (err)
                 return next(err);
             if (!err)
-                return res.json({SERVER_RESPONSE: 1, SERVER_MESSAGE: "Logged in!"});
-        })(req, res, next);
-    });
-};
-        // passport.authenticate('local', function(err, user, info)
-        // {
-        //     if (err)
-        //         return next(err);
-        //     if(!user)
-        //         return res.status(400).json({SERVER_RESPONSE: 0, SERVER_MESSAGE: "Wrong Credentials"});
-        //     req.logIn(user, function(err) {
-        //         if (err)
-        //             return next(err);
-        //         if (!err)
-        //             return res.json({ SERVER_RESPONSE: 1, SERVER_MESSAGE: "Logged in!" });
-        //
-        //     });
-        // })(req, res, next);
+                return res.json({ SERVER_RESPONSE: 1, SERVER_MESSAGE: "Logged in!" });
 
+        });
+    })(req, res, next);
+};
 
 module.exports.read = function(req, res)
 {
@@ -107,8 +92,8 @@ module.exports.readByUsername = function(req, res)
 
 module.exports.me = function(req, res)
 {
-
-    User.findOne({ username: req.user.username }, function(err, user) {
+    User.findOne({ username: req.user.username }, function(err, user)
+    {
         if (user)
         {
             res.writeHead(200, {"Content-Type": "application/json"});
@@ -132,8 +117,7 @@ module.exports.update = function(req, res)
     {
         if (user)
         {
-            if (user.username != req.user.username)
-            {
+            if (user.username != req.user.username) {
                 return res.status(401).end('Modifying other user');
             }
             else
