@@ -39,6 +39,7 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 
+require('./config/passport')(passport);
 require('./routes')(app, passport);
 
 // catch 404 and forward to error handler
