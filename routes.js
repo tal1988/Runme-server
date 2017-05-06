@@ -1,5 +1,6 @@
 var users  = require('./controllers/users');
 var express = require('express');
+var User = require('./models/user');
 
 module.exports = function(app, passport)
 {
@@ -10,7 +11,6 @@ module.exports = function(app, passport)
 
     // Login [x]
     app.post('/login', users.login);
-
 
     // Register [x]
     app.post('/register', users.create);
@@ -35,6 +35,14 @@ module.exports = function(app, passport)
         req.logout();
         res.end('Logged out')
     });
+
+    app.get('/userlist',function (req,res) {
+        User.find({},function (err, users) {
+            if(err) throw err;
+            res.json(users);
+        })
+
+    })
 
 };
 
