@@ -9,8 +9,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 
-
 var app = express();
+
 
 mongoose.connect(process.env.MONGOLAB_URI, function(err)
 {
@@ -25,21 +25,20 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(require('express-session')({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false
 }));
 
-// app.use('/', index);
-// app.use('/users', users);
+app.use(passport.initialize());
+app.use(passport.session());
+
 require('./routes')(app, passport);
 
 // catch 404 and forward to error handler
