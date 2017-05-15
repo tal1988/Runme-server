@@ -71,24 +71,6 @@ module.exports.read = function(req, res)
     });
 };
 
-module.exports.find = function (req,res)
-{
-  User.findOne({username: req.body.username},function (err,user)
-  {
-     if(user)
-     {
-         res.writeHead(200, {"Content-Type": "application/json"});
-         user = user.toObject();
-         delete user.password;
-         delete user.__v;
-         res.end(JSON.stringify(user));
-     }
-     else
-     {
-         return res.status(400).end('User not found');
-     }
-  });
-};
 
 module.exports.readByUsername = function(req, res)
 {
