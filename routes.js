@@ -18,6 +18,9 @@ module.exports = function(app, passport)
     // Search For User by ID [x]
     app.get('/user/search/id/:id', users.read);
 
+    // Search for user by his user name
+    app.get('/user/search/username/:username',users.find);
+
     // Search For User by Username [x]
     app.get('/user/search/username/:username', users.readByUsername);
 
