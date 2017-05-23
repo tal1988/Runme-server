@@ -1,5 +1,8 @@
 var User = require('../models/user');
+var Data = require('../models/data');
 var passport = require('passport');
+var DEFAULT_TOTAL_TIME = "00:00:00";
+var DEFAULT_TOTAL_KM = "0";
 
 module.exports = {};
 
@@ -31,6 +34,77 @@ module.exports.create = function(req, res)
             delete newUser.password;
             res.end(JSON.stringify(newUser));
         }
+    });
+};
+
+module.exports.savedata = function (req, res)
+{
+    User.findOne({username:req.body.username},function (err,user)
+    {
+        if(user)
+        {
+            Data.findOne({username:req.body.username},function (err,data)
+            {
+               if(data)
+               {
+                   var time = data.calcTotalTime(req.body.runningTime,data.total_time);
+                   var km = data.calcTotalKM(req.body.runningKM,data.total_km);
+                   var route = {route:req.body.route, route_time:req.body.route_time,route_km:req.body.route_km};
+                   data.routs.push(route);
+
+                   user.name = req.body.name ? req.body.name : user.name;
+                   data.total_time = time ? time : user.total_time;
+                   data.total_km = km ? km : user.total_km;
+                   data.routs = data.routs ? data.routs : data.routs;
+
+                   data.save();
+
+                   res.writeHead(200, {"Content-Type": "application/json"});
+                   data = data.toObject();
+                   res.end(JSON.stringify(data));
+               }
+               if(err)
+               {
+                   return res.status(400).end("Some thing went wrong,Try Again Later");
+               }
+               else
+               {
+                   var newData = new Data();
+                   newData.username = req.body.username;
+                   newData.time = DEFAULT_TOTAL_TIME;
+                   newData.km = DEFAULT_TOTAL_TIME;
+
+                   newData.save();
+
+                   res.writeHead(200, {"Content-Type": "application/json"});
+
+                   newData = newData.toObject();
+                   res.end(JSON.stringify(newData));
+               }
+            });
+        }
+        else
+        {
+            return res.status(400).end('Failed To Save Data');
+        }
+    });
+};
+
+module.exports.getdata = function (req, res)
+{
+    Data.findOne({username:req.body.username},function (err,data)
+    {
+      if(data)
+      {
+          res.writeHead(200, {"Content-Type": "application/json"});
+
+          data = data.toObject();
+          res.end(JSON.stringify(data));
+      }
+      else
+      {
+          return res.status(400).end('Failed To Get User Data');
+      }
     });
 };
 
