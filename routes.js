@@ -22,10 +22,10 @@ module.exports = function(app, passport)
     app.get('/user/search/username/:username', users.readByUsername);
 
     // Save User Data
-    app.post('/user/save',users.savedata)
+    app.post('/user/save',users.savedata);
 
     // Get User Data
-    app.get('/user/getdata',users.getdata)
+    app.get('/user/getdata',users.getdata);
 
     // My Profile for Currently Logged in User [x]
     app.get('/user/profile', isLoggedIn, users.me);
