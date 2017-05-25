@@ -15,7 +15,7 @@ dataSchema.methods.calcTotalTime = function(runningTime,totalTime)
 {
     var timeAsString = "";
     var totalTimeSplit = totalTime.split(":");
-    var totalTimeSec = totalTimeSplit[2].replace(/\s/g,'')
+    var totalTimeSec = totalTimeSplit[2].replace(/\s/g,'');
     var runningTimeSplit = runningTime.split(":");
     var runningTimeSec = runningTimeSplit[2].replace(/\s/g,'');
 

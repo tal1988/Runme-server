@@ -67,20 +67,6 @@ module.exports.savedata = function (req, res)
                {
                    return res.status(400).end("Some thing went wrong,Try Again Later");
                }
-               else
-               {
-                   var newData = new Data();
-                   newData.username = req.body.username;
-                   newData.time = DEFAULT_TOTAL_TIME;
-                   newData.km = DEFAULT_TOTAL_TIME;
-
-                   newData.save();
-
-                   res.writeHead(200, {"Content-Type": "application/json"});
-
-                   newData = newData.toObject();
-                   res.end(JSON.stringify(newData));
-               }
             });
         }
         else
@@ -103,7 +89,17 @@ module.exports.getdata = function (req, res)
       }
       else
       {
-          return res.status(400).end('Failed To Get User Data');
+          var newData = new Data();
+          newData.username = req.body.username;
+          newData.time = DEFAULT_TOTAL_TIME;
+          newData.km = DEFAULT_TOTAL_TIME;
+
+          newData.save();
+
+          res.writeHead(200, {"Content-Type": "application/json"});
+
+          newData = newData.toObject();
+          res.end(JSON.stringify(newData));
       }
     });
 };
