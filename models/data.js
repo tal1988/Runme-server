@@ -7,7 +7,7 @@ var dataSchema = mongoose.Schema
     username:String,
     total_time: String,
     total_km: String,
-    routs: [obj]
+    routs: [JSON]
 });
 
 
