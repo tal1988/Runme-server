@@ -57,8 +57,8 @@
       <file leaf-file-name="users.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="93" column="31" lean-forward="true" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
+            <state relative-caret-position="88">
+              <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -324,7 +324,7 @@
       <workItem from="1494846043025" duration="2862000" />
       <workItem from="1495483075855" duration="724000" />
       <workItem from="1495543978992" duration="10633000" />
-      <workItem from="1495697469576" duration="3807000" />
+      <workItem from="1495697469576" duration="4038000" />
     </task>
     <task id="LOCAL-00001" summary="DB INIT">
       <created>1493141355156</created>
@@ -529,11 +529,18 @@
       <option name="project" value="LOCAL" />
       <updated>1495702336495</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="update user data save, and get.">
+      <created>1495703805855</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1495703805855</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52100000" />
+    <option name="totallyTimeSpent" value="52331000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -945,8 +952,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="93" column="31" lean-forward="true" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
+        <state relative-caret-position="88">
+          <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
           <folding />
         </state>
       </provider>

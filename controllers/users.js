@@ -92,7 +92,7 @@ module.exports.getdata = function (req, res)
           var newData = new Data();
           newData.username = req.body.username;
           newData.total_time = DEFAULT_TOTAL_TIME;
-          newData.total_km = DEFAULT_TOTAL_TIME;
+          newData.total_km = DEFAULT_TOTAL_KM;
 
           newData.save();
 
