@@ -49,8 +49,10 @@ module.exports.savedata = function (req, res)
                {
                    var time = data.calcTotalTime(req.body.runningTime,data.total_time);
                    var km = data.calcTotalKM(req.body.runningKM,data.total_km);
-                   //var route = {route:req.body.route, route_time:req.body.runningTime,route_km:req.body.runningKM};
-                   data.routs.push(req.body.route);
+                   var speed = data.calcAvgSpeed(req.body.runningTime,req,req.body.runningKM);
+                   var route = {route:req.body.route, route_running_time:req.body.runningTime,route_running_km:req.body.runningKM,
+                                route_actual_dist:req.body.routeDist,route_avg_running_speed:speed};
+                   data.routs.push(route);
 
                    //user.name = req.body.name ? req.body.name : user.name;
                    data.total_time = time ? time : user.total_time;
