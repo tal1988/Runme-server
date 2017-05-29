@@ -59,13 +59,13 @@ dataSchema.method.calcTotalKM = function (totalKM,runningKM)
     return (String)(parseFloat(totalKM.replace(/\s/g,'')) + parseFloat(runningKM.replace(/\s/g,''))) +"";
 };
 
-dataSchema.method.calcAvgSpeed = function (runningTime,runningDistance)
-{
-    var dist = parseFloat(runningDistance.replace(/\s/g,''));
-    var time = runningTime.split(":");
-    var hours = time[0];
-    return (String) (dist/hours);
-};
+// dataSchema.method.calcAvgSpeed = function (runningTime,runningDistance)
+// {
+//     var dist = parseFloat(runningDistance.replace(/\s/g,''));
+//     var time = runningTime.split(":");
+//     var hours = time[0];
+//     return (String) (dist/hours);
+// };
 
 dataSchema.methods.convertStringToInt = function (number)
 {
