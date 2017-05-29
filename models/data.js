@@ -8,7 +8,8 @@ var dataSchema = mongoose.Schema
     total_time: String,
     total_km: String,
     routs: [JSON]
-});
+},
+{ collection: 'users_data' });
 
 
 dataSchema.methods.calcTotalTime = function(runningTime,totalTime)

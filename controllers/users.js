@@ -49,10 +49,10 @@ module.exports.savedata = function (req, res)
                {
                    var time = data.calcTotalTime(req.body.runningTime,data.total_time);
                    var km = data.calcTotalKM(req.body.runningKM,data.total_km);
-                   var route = {route:req.body.route, route_time:req.body.route_time,route_km:req.body.route_km};
-                   data.routs.push(route);
+                   //var route = {route:req.body.route, route_time:req.body.runningTime,route_km:req.body.runningKM};
+                   data.routs.push(req.body.route);
 
-                   user.name = req.body.name ? req.body.name : user.name;
+                   //user.name = req.body.name ? req.body.name : user.name;
                    data.total_time = time ? time : user.total_time;
                    data.total_km = km ? km : user.total_km;
                    data.routs = data.routs ? data.routs : data.routs;
