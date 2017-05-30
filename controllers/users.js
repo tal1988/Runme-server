@@ -5,19 +5,47 @@ var DEFAULT_TOTAL_TIME = "00:00:00";
 var DEFAULT_TOTAL_KM = "0";
 
 module.exports = {};
-// module.exports.test = function (req,res)
-// {
-//     var newData = new Data();
-//     var time = newData.calcTotalTime("00:15:00","00:15:00");
-//     var km = newData.calcTotalKM("5","4");
-//     res.writeHead(200, {"Content-Type": "application/json"});
-//
-//     var json = {time:time,km:km};
-//
-//     res.end(JSON.stringify(json));
-//
-//     //console.log("time is: "+time + "and km is : "+km);
-// };
+module.exports.test = function (req,res)
+{
+    User.findOne({username:"Taltol"},function (err,user)
+    {
+        if(user)
+        {
+            Data.find()({ "_id" : ObjectId(user.id), "x" : 1 } ,function (err,data)
+            {
+                if(data)
+                {
+                    var time = data.calcTotalTime("00:15:00","00:15:00");
+                    var km = data.calcTotalKM("5","4");
+                    var routeList = ["(2,3)","(3,3)"];
+                    //var speed = data.calcAvgSpeed(req.body.runningTime,req,req.body.runningKM);
+                    var route = {route:routeList, route_running_time:time,route_running_km:km,
+                        route_actual_dist:km};
+                    data.routs.push(route);
+
+                    //user.name = req.body.name ? req.body.name : user.name;
+                    data.total_time = time ? time : user.total_time;
+                    data.total_km = km ? km : user.total_km;
+                    data.routs = data.routs ? data.routs : data.routs;
+
+                    data.save();
+
+                    res.writeHead(200, {"Content-Type": "application/json"});
+                    data = data.toObject();
+                    res.end(JSON.stringify(data));
+                }
+                if(err)
+                {
+                    return res.status(400).end("Some thing went wrong,Try Again Later");
+                }
+            });
+        }
+        else
+        {
+            return res.status(400).end('Failed To Save Data');
+        }
+    });
+};
 
 module.exports.create = function(req, res)
 {
@@ -63,9 +91,9 @@ module.exports.savedata = function (req, res)
                    var time = data.calcTotalTime(req.body.runningTime,data.total_time);
                    var km = data.calcTotalKM(req.body.runningKM,data.total_km);
                    //var speed = data.calcAvgSpeed(req.body.runningTime,req,req.body.runningKM);
-                   //var route = {route:req.body.route, route_running_time:req.body.runningTime,route_running_km:req.body.runningKM,
-                   //              route_actual_dist:req.body.routeDist};
-                   //data.routs.push(route);
+                   var route = {route:req.body.route, route_running_time:req.body.runningTime,route_running_km:req.body.runningKM,
+                                 route_actual_dist:req.body.routeDist};
+                   data.routs.push(route);
 
                    //user.name = req.body.name ? req.body.name : user.name;
                    data.total_time = time ? time : user.total_time;

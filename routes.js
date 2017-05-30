@@ -11,7 +11,7 @@ module.exports = function(app, passport)
     });
 
     // Test
-    //app.get('/test',users.test);
+    app.get('/test',users.test);
 
     // Login [x]
     app.post('/login', users.login);
@@ -29,7 +29,7 @@ module.exports = function(app, passport)
     app.post('/user/save',users.savedata);
 
     // Get User Data
-    app.get('/user/getdata',users.getdata);
+    app.post('/user/getdata',users.getdata);
 
     // My Profile for Currently Logged in User [x]
     app.get('/user/profile', isLoggedIn, users.me);
