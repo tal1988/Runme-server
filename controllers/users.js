@@ -5,6 +5,19 @@ var DEFAULT_TOTAL_TIME = "00:00:00";
 var DEFAULT_TOTAL_KM = "0";
 
 module.exports = {};
+// module.exports.test = function (req,res)
+// {
+//     var newData = new Data();
+//     var time = newData.calcTotalTime("00:15:00","00:15:00");
+//     var km = newData.calcTotalKM("5","4");
+//     res.writeHead(200, {"Content-Type": "application/json"});
+//
+//     var json = {time:time,km:km};
+//
+//     res.end(JSON.stringify(json));
+//
+//     //console.log("time is: "+time + "and km is : "+km);
+// };
 
 module.exports.create = function(req, res)
 {

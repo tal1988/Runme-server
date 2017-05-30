@@ -20,9 +20,9 @@ dataSchema.methods.calcTotalTime = function(runningTime,totalTime)
     var runningTimeSplit = runningTime.split(":");
     var runningTimeSec = runningTimeSplit[2].replace(/\s/g,'');
 
-    var totalHours = (methods.convertStringToInt(totalTimeSplit[0])) + (methods.convertStringToInt(runningTimeSplit[0]));
-    var totalMin = (methods.convertStringToInt(totalTimeSplit[1])) + (methods.convertStringToInt(runningTimeSplit[1]));
-    var totalSec = (methods.convertStringToInt(totalTimeSec)) + (methods.convertStringToInt(runningTimeSec));
+    var totalHours = (this.convertStringToInt(totalTimeSplit[0])) + (this.convertStringToInt(runningTimeSplit[0]));
+    var totalMin = (this.convertStringToInt(totalTimeSplit[1])) + (this.convertStringToInt(runningTimeSplit[1]));
+    var totalSec = (this.convertStringToInt(totalTimeSec)) + (this.convertStringToInt(runningTimeSec));
 
     while (totalSec >= ONE_MINUTE)
     {
@@ -54,7 +54,7 @@ dataSchema.methods.calcTotalTime = function(runningTime,totalTime)
     return timeAsString;
 };
 
-dataSchema.method.calcTotalKM = function (totalKM,runningKM)
+dataSchema.methods.calcTotalKM = function (totalKM,runningKM)
 {
     return (String)(parseFloat(totalKM.replace(/\s/g,'')) + parseFloat(runningKM.replace(/\s/g,''))) +"";
 };

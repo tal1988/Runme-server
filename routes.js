@@ -1,13 +1,17 @@
 var users  = require('./controllers/users');
 var express = require('express');
 var User = require('./models/user');
+var Data = require('./models/data');
 
 module.exports = function(app, passport)
 {
     app.get('/', function(req, res) {
-        res.writeHead(200, {"Content-Type": "application/json"});
+        //res.writeHead(200, {"Content-Type": "application/json"});
         res.end("MobilePassport API v1");
     });
+
+    // Test
+    //app.get('/test',users.test);
 
     // Login [x]
     app.post('/login', users.login);
