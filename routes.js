@@ -10,9 +10,6 @@ module.exports = function(app, passport)
         res.end("MobilePassport API v1");
     });
 
-    // Test
-    app.get('/test',users.test);
-
     // Login [x]
     app.post('/login', users.login);
 

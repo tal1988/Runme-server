@@ -7,9 +7,10 @@ var dataSchema = mongoose.Schema
     username:String,
     total_time: String,
     total_km: String,
+    speed: String,
     routs: [JSON]
 },
-{ collection: 'users_data' });
+{collection: 'users_data' });
 
 
 dataSchema.methods.calcTotalTime = function(runningTime,totalTime)
@@ -59,13 +60,26 @@ dataSchema.methods.calcTotalKM = function (totalKM,runningKM)
     return (String)(parseFloat(totalKM.replace(/\s/g,'')) + parseFloat(runningKM.replace(/\s/g,''))) +"";
 };
 
-// dataSchema.method.calcAvgSpeed = function (runningTime,runningDistance)
-// {
-//     var dist = parseFloat(runningDistance.replace(/\s/g,''));
-//     var time = runningTime.split(":");
-//     var hours = time[0];
-//     return (String) (dist/hours);
-// };
+dataSchema.method.calcAvgSpeed = function (runningTime,runningDistance)
+{
+    var dist = parseFloat(runningDistance.replace(/\s/g,''));
+    var time = runningTime.split(":");
+    var hours = time[0];
+    var min = time[1];
+
+    if(min == 0 && hours == 0)
+        return 0;
+    else if(hours > 0 && min == 0)
+    {
+        return dist/hours;
+    }
+    else if(hours > 0 && min > 0)
+    {
+        var ratio = min /60;
+        var totalRatio = hours + ratio;
+        return dist/totalRatio;
+    }
+};
 
 dataSchema.methods.convertStringToInt = function (number)
 {
