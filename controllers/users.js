@@ -6,6 +6,7 @@ var DEFAULT_TOTAL_KM = "0";
 
 module.exports = {};
 
+
 module.exports.create = function(req, res)
 {
     if (!req.body.name || !req.body.username || !req.body.password || !req.body.email)
@@ -88,7 +89,7 @@ module.exports.getdata = function (req, res)
           data = data.toObject();
           res.end(JSON.stringify(data));
       }
-      else
+      else if(!data)
       {
           var newData = new Data();
           newData.username = req.body.username;
