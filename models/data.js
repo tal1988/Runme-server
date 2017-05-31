@@ -37,17 +37,17 @@ dataSchema.methods.calcTotalTime = function(runningTime,totalTime)
         totalMin -= ONE_HOUR;
     }
 
-    if((totalHours/10) == 0)
+    if((totalHours/10) < 1)
         timeAsString = "0"+totalHours+":";
     else
         timeAsString = totalHours+":";
 
-    if((totalMin/10) == 0)
+    if((totalMin/10) < 1)
         timeAsString += "0"+totalMin+":";
     else
         timeAsString += totalMin +":";
 
-    if((totalSec/10) == 0)
+    if((totalSec/10) < 1)
         timeAsString += "0"+totalSec;
     else
         timeAsString += totalSec+"";
