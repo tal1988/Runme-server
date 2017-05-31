@@ -6,6 +6,36 @@ var DEFAULT_TOTAL_KM = "0";
 
 module.exports = {};
 
+// module.exports.test = function (req, res)
+// {
+//     User.findOne({username:"Taltol"},function (err,user)
+//     {
+//         if(user)
+//         {
+//             Data.findOne({username:"Taltol"},function (err,data)
+//             {
+//                 if(data)
+//                 {
+//
+//                     var speed = data.calcAvgSpeed("00:01:26","0.070");
+//
+//
+//
+//                     res.writeHead(200, {"Content-Type": "application/json"});
+//                     res.end(JSON.stringify({speed:speed}));
+//                 }
+//                 if(err)
+//                 {
+//                     return res.status(400).end("Some thing went wrong,Try Again Later");
+//                 }
+//             });
+//         }
+//         else
+//         {
+//             return res.status(400).end('Failed To Save Data');
+//         }
+//     });
+// };
 
 module.exports.create = function(req, res)
 {
@@ -50,7 +80,7 @@ module.exports.savedata = function (req, res)
                {
                    var time = data.calcTotalTime(req.body.runningTime,data.total_time);
                    var km = data.calcTotalKM(req.body.runningKM,data.total_km);
-                   var speed = data.calcAvgSpeed(req.body.runningTime,req,req.body.runningKM);
+                   var speed = data.calcAvgSpeed(req.body.runningTime,req.body.runningKM);
                    var route = {route:req.body.route, route_running_time:req.body.runningTime,route_running_km:req.body.runningKM,
                                  route_actual_dist:req.body.routeDist,running_avg_speed:speed};
                    data.routs.push(route);
