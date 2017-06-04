@@ -55,7 +55,7 @@ module.exports.create = function(req, res)
             newUser.username = req.body.username;
             newUser.password = newUser.generateHash(req.body.password);
             newUser.email = req.body.email;
-            newUser.desc = req.body.desc;
+            newUser.avatar = req.body.avatar;
 
             newUser.save();
 
