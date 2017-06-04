@@ -226,7 +226,7 @@ module.exports.update = function(req, res)
             else
             {
                 user.name = req.body.name ? req.body.name : user.name;
-                //user.desc = req.body.dec ? req.body.desc : user.desc;
+                user.avatar = req.body.avatar ? req.body.avatar : user.avatar;
                 user.username = req.body.username ? req.body.username : user.username;
                 //user.password = req.body.password ? user.generateHash(req.body.password) : user.password;
                 user.email = req.body.email ? req.body.email : user.email;
