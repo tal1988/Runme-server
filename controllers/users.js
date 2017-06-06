@@ -56,7 +56,7 @@ module.exports.create = function(req, res)
             newUser.password = newUser.generateHash(req.body.password);
             newUser.email = req.body.email;
             newUser.avatar = req.body.avatar;
-            newUser.avatar_path = req.body.avatar_path;
+            newUser.avatar_rotate = req.body.avatar_rotate;
 
             newUser.save();
 
@@ -229,7 +229,7 @@ module.exports.update = function(req, res)
                 user.name = req.body.name ? req.body.name : user.name;
                 user.avatar = req.body.avatar ? req.body.avatar : user.avatar;
                 user.username = req.body.username ? req.body.username : user.username;
-                user.avatar_path = req.body.path ? req.body.path : user.avatar_path;
+                user.avatar_rotate = req.body.avatar_rotate ? req.body.avatar_rotate : user.avatar_rotate;
                 user.email = req.body.email ? req.body.email : user.email;
                 user.save();
 

@@ -6,7 +6,7 @@ var userSchema = mongoose.Schema
 ({
     name: String,
     avatar: String,
-    avatar_path: String,
+    avatar_rotate: Number,
     username: String,
     password: String,
     email: String
