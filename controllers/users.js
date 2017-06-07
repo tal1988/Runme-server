@@ -83,7 +83,7 @@ module.exports.savedata = function (req, res)
                    var km = data.calcTotalKM(req.body.runningKM,data.total_km);
                    var speed = data.calcAvgSpeed(req.body.runningTime,req.body.runningKM);
                    var route = {route:req.body.route, route_running_time:req.body.runningTime,route_running_km:req.body.runningKM,
-                                 route_actual_dist:req.body.routeDist,running_avg_speed:speed};
+                                 route_actual_dist:req.body.routeDist,running_avg_speed:speed,date:req.body.timeAndDate};
                    data.routs.push(route);
 
                    data.total_time = time ? time : user.total_time;
