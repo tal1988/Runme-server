@@ -22,8 +22,6 @@ mongoose.connect(process.env.MONGOLAB_URI, function(err)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -60,7 +58,6 @@ app.use(function(err, req, res, next)
   // render the error page
   res.status(err.status || 500);
   console.log(err.message);
-  //res.render('error');
 });
 
 module.exports = app;

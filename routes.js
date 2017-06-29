@@ -5,11 +5,9 @@ var User = require('./models/user');
 module.exports = function(app, passport)
 {
     app.get('/', function(req, res) {
-        //res.writeHead(200, {"Content-Type": "application/json"});
         res.end("MobilePassport API v1");
     });
 
-    // app.get('/test',users.test);
 
     // Login [x]
     app.post('/login', users.login);
@@ -17,43 +15,25 @@ module.exports = function(app, passport)
     // Register [x]
     app.post('/register', users.create);
 
-    // Search For User by ID [x]
-    app.get('/user/search/id/:id', users.read);
-
-    // Search For User by Username [x]
-    app.get('/user/search/username/:username', users.readByUsername);
-
     // Save User Data
     app.post('/user/save',users.savedata);
 
     // Get User Data
     app.post('/user/getdata',users.getdata);
 
-    // My Profile for Currently Logged in User [x]
-    app.get('/user/profile', isLoggedIn, users.me);
 
     // Update As Currently Logged In User [x]
     app.post('/user/update', isLoggedIn, users.update);
 
-    // Delete Currently Logged in User [x]
-    app.delete('/user/delete', isLoggedIn, users.delete);
 
-    // [x]
+    // Method that execute when the user is want to log out.
     app.post('/logout', function(req, res) {
         req.logout();
         res.end('Logged out')
     });
-
-    app.get('/userlist',function (req,res) {
-        User.find({},function (err, users) {
-            if(err) throw err;
-            res.json(users);
-        })
-
-    })
-
 };
 
+//Method that checks if the user is logged in.
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();

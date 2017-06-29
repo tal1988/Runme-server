@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var ONE_MINUTE = 60;
 var ONE_HOUR = 60;
 
+//User data schema
 var dataSchema = mongoose.Schema
 ({
     username:String,
@@ -12,7 +13,7 @@ var dataSchema = mongoose.Schema
 },
 {collection: 'users_data' });
 
-
+//Method that calculate the total time that user has ran.
 dataSchema.methods.calcTotalTime = function(runningTime,totalTime)
 {
     var timeAsString = "";
@@ -55,11 +56,13 @@ dataSchema.methods.calcTotalTime = function(runningTime,totalTime)
     return timeAsString;
 };
 
+//Method that calculate total km that the user has ran.
 dataSchema.methods.calcTotalKM = function (totalKM,runningKM)
 {
     return (String)(parseFloat(totalKM.replace(/\s/g,'')) + parseFloat(runningKM.replace(/\s/g,''))) +"";
 };
 
+//Method that calculate total speed avg of user.
 dataSchema.methods.calcAvgSpeed = function (runningTime,runningDistance)
 {
     var dist = parseFloat(runningDistance.replace(/\s/g,''));
@@ -86,6 +89,7 @@ dataSchema.methods.calcAvgSpeed = function (runningTime,runningDistance)
     }
 };
 
+//Method that convert string to int.
 dataSchema.methods.convertStringToInt = function (number)
 {
     return parseInt(number);

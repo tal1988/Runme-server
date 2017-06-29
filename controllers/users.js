@@ -6,37 +6,7 @@ var DEFAULT_TOTAL_KM = "0";
 
 module.exports = {};
 
-// module.exports.test = function (req, res)
-// {
-//     User.findOne({username:"Taltol"},function (err,user)
-//     {
-//         if(user)
-//         {
-//             Data.findOne({username:"Taltol"},function (err,data)
-//             {
-//                 if(data)
-//                 {
-//
-//                     var speed = data.calcAvgSpeed("00:01:26","0.070");
-//
-//
-//
-//                     res.writeHead(200, {"Content-Type": "application/json"});
-//                     res.end(JSON.stringify({speed:speed}));
-//                 }
-//                 if(err)
-//                 {
-//                     return res.status(400).end("Some thing went wrong,Try Again Later");
-//                 }
-//             });
-//         }
-//         else
-//         {
-//             return res.status(400).end('Failed To Save Data');
-//         }
-//     });
-// };
-
+//Method that is using to create new user.
 module.exports.create = function(req, res)
 {
     if (!req.body.name || !req.body.username || !req.body.password || !req.body.email)
@@ -69,6 +39,7 @@ module.exports.create = function(req, res)
     });
 };
 
+//Method that save user data to the data base.
 module.exports.savedata = function (req, res)
 {
     User.findOne({username:req.body.username},function (err,user)
@@ -109,6 +80,7 @@ module.exports.savedata = function (req, res)
     });
 };
 
+//Method that get user data from the data base.
 module.exports.getdata = function (req, res)
 {
     Data.findOne({username:req.body.username},function (err,data)
@@ -137,6 +109,7 @@ module.exports.getdata = function (req, res)
     });
 };
 
+//Method that do authenticate after login request by the user.
 module.exports.login = function(req, res, next)
 {
     passport.authenticate('local', function(err, user, info)
@@ -155,66 +128,7 @@ module.exports.login = function(req, res, next)
     })(req, res, next);
 };
 
-module.exports.read = function(req, res)
-{
-    User.findById(req.params.id, function(err, user)
-    {
-        if (user)
-        {
-            res.writeHead(200, {"Content-Type": "application/json"});
-            user = user.toObject();
-            delete user.password;
-            delete user.__v;
-            res.end(JSON.stringify(user));
-        }
-        else
-        {
-            return res.status(400).end('User not found');
-        }
-    });
-};
-
-
-module.exports.readByUsername = function(req, res)
-{
-    User.findOne({ username: req.params.username }, function(err, user)
-    {
-        if (user)
-        {
-            res.writeHead(200, {"Content-Type": "application/json"});
-            user = user.toObject();
-            delete user.password;
-            delete user.__v;
-            res.end(JSON.stringify(user));
-        }
-        else
-        {
-            return res.status(400).end('User not found');
-        }
-    });
-};
-
-module.exports.me = function(req, res)
-{
-    User.findOne({ username: req.user.username }, function(err, user)
-    {
-        if (user)
-        {
-            res.writeHead(200, {"Content-Type": "application/json"});
-            user = user.toObject();
-            delete user.password;
-            delete user.__v;
-            res.end(JSON.stringify(user));
-        }
-        else
-        {
-            return res.status(400).end('User not found');
-        }
-    });
-
-};
-
-
+//Method that update the user data in the data base.
 module.exports.update = function(req, res)
 {
     User.findById(req.user.id, function(err, user)
@@ -243,13 +157,5 @@ module.exports.update = function(req, res)
         {
             return res.status(400).end('User not found');
         }
-    });
-};
-
-module.exports.delete = function(req, res)
-{
-    User.remove({_id: req.user.id}, function(err)
-    {
-        res.end('Deleted')
     });
 };
