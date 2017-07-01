@@ -21,8 +21,10 @@ module.exports = function(app, passport)
     // Get User Data
     app.post('/user/getdata',users.getdata);
 
+    // Search for user by username
+    app.get('/user/search/username/:username', users.searchByUsername);
 
-    // Update As Currently Logged In User [x]
+    // Update as currently logged in user
     app.post('/user/update', isLoggedIn, users.update);
 
 

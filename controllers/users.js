@@ -109,6 +109,25 @@ module.exports.getdata = function (req, res)
     });
 };
 
+//Method that search for a specific user name in the data base.
+module.exports.searchByUsername = function(req, res) {
+    User.findOne({ username: req.params.username }, function(err, user)
+    {
+        if (user)
+        {
+            res.writeHead(200, {"Content-Type": "application/json"});
+            user = user.toObject();
+            delete user.password;
+            delete user.__v;
+            res.end(JSON.stringify(user));
+        }
+        else
+        {
+            return res.status(400).end('User not found');
+        }
+    });
+};
+
 //Method that do authenticate after login request by the user.
 module.exports.login = function(req, res, next)
 {
@@ -118,7 +137,8 @@ module.exports.login = function(req, res, next)
             return next(err);
         if(!user)
             return res.status(400).json({SERVER_RESPONSE: 0, SERVER_MESSAGE: "Wrong Credentials"});
-        req.logIn(user, function(err) {
+        req.logIn(user, function(err)
+        {
             if (err)
                 return next(err);
             if (!err)
